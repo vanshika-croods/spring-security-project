@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>User Dashboard</title>
+<title>${user.firstName} Dashboard</title>
 
 <!-- Custom fonts for this template-->
 <link href="/assests/vendor/fontawesome-free/css/all.min.css"
@@ -206,19 +206,24 @@
 															</div>
 														</div>
 														<div class="row">
-															<div class="form-group col-md-7 col-12">
-																<label>UserName</label> <input type="text" readonly="readonly"
-																	class="form-control" name="userName" value="${userlist.userName}">
-																<div class="invalid-feedback">Please fill in the
-																	UserName</div>
+														<div class="form-group col-md-6 col-12">
+															<label>User Name</label> <input type="text"
+																class="form-control" name="firstName"
+																value="${userlist.userName}" readonly="readonly">
+															<div class="invalid-feedback">Please fill in the
+																User name</div>
 															</div>
-															<%-- <div class="form-group col-md-5 col-12">
-																<label>Password</label> <input type="password" name="password"
-																	class="form-control" value="${userlist.password}">
-															</div> --%>
+															
+														<div class="form-group col-md-6 col-12">
+														 <label>Password</label> 
+														<input type="password" class="form-control" name="password" required="false">
+														 
+														<div class="invalid-feedback">Please fill in the
+																password</div>
+															</div>
 														</div>
+														
 													
-	
 													</div>
 
 													

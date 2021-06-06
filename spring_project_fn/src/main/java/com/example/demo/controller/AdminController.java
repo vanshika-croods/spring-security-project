@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -47,6 +48,22 @@ public class AdminController {
 		user.setRoles(null);
 		//view.addObject("viewSupport", listSuppoprt);
 		return user;
+	}
+	
+	@GetMapping("blockUser/{userId}/block")
+	public ModelAndView BlockUser(@PathVariable("userId") long userId) {
+		userService.updateOrder(0, userId);
+		System.out.println("updated user here");
+		//if admin block user
+		return new ModelAndView("redirect:/admin/index");
+	}
+	
+	@GetMapping("unblockUser/{userId}/unblock")
+	public ModelAndView unBlockUser(@PathVariable("userId") long userId) {
+		userService.updateOrder(1, userId);
+		System.out.println("updated user here");
+		//if admin block user
+		return new ModelAndView("redirect:/admin/index");
 	}
 	
 }

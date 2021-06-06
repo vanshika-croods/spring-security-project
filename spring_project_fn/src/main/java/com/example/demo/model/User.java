@@ -35,6 +35,9 @@ public class User {
 	 private String lastName;
 	 private String userName;
 	 private String password;
+	 private String userType;
+	 private int status;
+	 //to block or unblock user after login
 	 
 	 @ManyToMany
 	 @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))   

@@ -18,5 +18,6 @@ public interface UserServic {
 	
 	void deleteById(long id);
 	
-	
+	void updateOrder(int status, long userId);
+
 }

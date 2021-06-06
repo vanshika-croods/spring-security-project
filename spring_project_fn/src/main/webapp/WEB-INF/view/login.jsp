@@ -1,7 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 
 <html lang="en">
 <head>
@@ -46,34 +49,34 @@
 		<div class="container-login100"
 			style="background-image: url('/assests/img/bg-01.jpg');">
 			<div class="wrap-login100 p-t-30 p-b-50">
+				<%-- 				<div c:if="${param.error}" class="alert alert-danger">
+					Invalid username or password.</div>
+ --%>
+				<div c:if="${param.error}" class="alert alert-danger">
+					    
+					<p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+				</div>
 				<span class="login100-form-title p-b-41"> Account Login </span>
 				<form class="login100-form validate-form p-b-33 p-t-5" method="POST">
 
 					<div class="wrap-input100 validate-input"
 						data-validate="Enter username">
 						<input class="input100" type="text" name="userName"
-							placeholder="userName"> <span class="focus-input100"
+							placeholder="User name"> <span class="focus-input100"
 							data-placeholder="&#xe82a;"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input"
 						data-validate="Enter password">
 						<input class="input100" type="password" name="password"
-							placeholder="password"> <span class="focus-input100"
+							placeholder="Password"> <span class="focus-input100"
 							data-placeholder="&#xe80f;"></span>
 					</div>
-					<c:if test="${param.error ne null}">
-						<div class="alert-danger">Invalid username and password.</div>
-					</c:if>
-					<c:if test="${param.logout ne null}">
-						<div class="alert-normal">You have been logged out.</div>
-					</c:if>
+
 					<div class="container-login100-form-btn m-t-32">
 						<button class="login100-form-btn">Login</button>
 					</div>
-					<div class="container text-center mt-5">
-						Not Register yet??<a href="register">Register here</a>
-					</div>
+
 				</form>
 			</div>
 		</div>

@@ -16,7 +16,7 @@ public class AuthFailerHandler implements AuthenticationFailureHandler {
 			AuthenticationException exception) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		System.out.println("onAuthenticationFail");
-		response.sendRedirect("/fail_login");
+		response.sendRedirect("/login?error");
 		
 	}
 

@@ -887,7 +887,7 @@ rotate(
             <spring:bind path="password">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <form:input type="password" path="password" class="form-control" placeholder="password"
-                                autofocus="true"></form:input>
+                                autofocus="true" required="false"></form:input>
                     <form:errors path="password"></form:errors>
                 </div>
             </spring:bind>
@@ -944,7 +944,7 @@ rotate(
 			<li></li>
 			<li></li>
 		</ul>
-	</div>
+	</div> 
 	<!-- //main -->
 	<script>
 		$(document).ready(function(){
@@ -953,7 +953,7 @@ rotate(
 					  toast: true,
 					  position: 'top-end',
 					  showConfirmButton: false,
-					  timer: 4000,
+					  timer: 10000,
 					  timerProgressBar: true,
 					  didOpen: (toast) => {
 					    toast.addEventListener('mouseenter', Swal.stopTimer)

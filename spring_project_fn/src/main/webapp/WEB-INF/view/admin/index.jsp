@@ -85,6 +85,7 @@
 							<th>LastName</th>
 							<th>UserName</th>
 							<th>Action</th>
+							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -205,13 +206,9 @@
 		
 		$('table#example').DataTable(
 		{
-			responsive: true,
-            pageLength: 10,
-            serverSide: true,
-            searching: true,
-            processing: !0,
+			serverSide: true,          
             "lengthMenu": [[10, 25, 50,100, -1], [10, 25, 50,100, "All"]],
-            
+        
 		  ajax: 
 		  {
     		'contentType': 'application/json',
@@ -236,10 +233,12 @@
             {
                  data : 'userName'
             },
-             
-             {
-             data : 'userId'
-             }],
+            {
+              data : 'userId'
+            },
+            {
+            	data:'userId'
+            }],
           columnDefs: [{
         	  
                   targets: 0,
@@ -313,9 +312,30 @@
            
            return action;
            
-          /*  action += '\n<a href="/manufacturing/' + t.type + '/' + t.manufacturingId + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-info m-btn--icon m-btn--icon-only m-btn--pill" title="Edit"> <i class="fa fa-edit"></i></a>\n'
-     		 action += '\n<button  onclick="deleteManufacturing(' + t.manufacturingId + ',`' + t.type + '`)"> <i class="fa fa-trash"></i></button>\n'
-*/          
+           
+		}
+    
+    },
+    
+    {
+  	  	targets: 5,
+        title: "Actions",
+        orderable: !1,
+        class: "text-center",
+        render: function (a, e, t, n) 
+        {
+      	 
+        /*  var l='<button onclick="blockUser(';
+      	  l+=t.userId;
+      	  l+=')" href="JavaScript:Void(0);"></button>'
+      	  +'<button onclick="unblockUser(';
+      	  l+=t.userId;
+      	  l+=')" href="JavaScript:Void(0);"></button>'; */
+      	  
+      	var l = '<a onclick="blockUser('+t.userId+')"  class="btn btn-primary">Block</a>'+
+		'<a onclick="unblockUser('+t.userId+')" class="btn btn-secondary">UnBlock</a>';
+		console.log(l);
+         return l;               
 		}
     
     }],
@@ -339,6 +359,42 @@
 
         })
     }
+	
+	function blockUser(userId){
+        console.log("deleteeeeeeeeeeesdesfsdf")
+        var u = '/admin'+'/blockUser/' + userId + '/block';
+        swal({
+            title: "Are you sure you want to block?",
+            text: "You won't be able to revert this!",
+            type: "warning",
+            showCancelButton: !0,
+            confirmButtonText: "Yes, block it!"
+        }).then(function (e) {
+            if (e.value) {
+                
+                   e.value && u != '' ? window.location.href = u : console.error("CROODS: data-url undefined ")
+               }
+
+        })
+	}
+	
+	function unblockUser(userId){
+        console.log("deleteeeeeeeeeeesdesfsdf")
+        var u = '/admin'+'/unblockUser/' + userId + '/unblock';
+        swal({
+            title: "Are you sure you want to unblock?",
+            text: "You won't be able to revert this!",
+            type: "warning",
+            showCancelButton: !0,
+            confirmButtonText: "Yes, block it!"
+        }).then(function (e) {
+            if (e.value) {
+                
+                   e.value && u != '' ? window.location.href = u : console.error("CROODS: data-url undefined ")
+               }
+
+        })
+	}
 	
 	function edituser(userId){
 		$.ajax({

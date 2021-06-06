@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -50,9 +52,12 @@ public class UserController {
 //	public static final long URID_BRANCH = 3;
 //	public static final long URID_USER = 4;
 	@GetMapping("index")
-	public ModelAndView index() {
+	public ModelAndView index(HttpSession session) 
+	{
+		Long userId=Long.parseLong(session.getAttribute("userId").toString());
+
 		String username = baseMethod.getUser();
-		User user = userService.getByUserName(username);
+		User user = userService.findById(userId);//getByUserName(username);
 		return new ModelAndView("user/index").addObject("userlist",user);
 	}
 	
@@ -71,10 +76,18 @@ public class UserController {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		User user = userService.findById(user1.getUserId());
 		
-		if(user!=null) {
+		String password = user1.getPassword();
+		if(user!=null && password!=null) {
 			//user update
 			log.warning("user update method");
 			System.out.println("updated..");
+//			String password = user1.getPassword();
+			System.out.println("Password:::"+password);
+			if(password!=null) {
+				String encodedPassword = passwordEncoder.encode(user1.getPassword());
+				user.setPassword(encodedPassword);
+			}
+			
 		}
 		else {
 			//new entry
@@ -83,6 +96,8 @@ public class UserController {
 			user.setUserName(user1.getUserName());
 			String encodedPassword = passwordEncoder.encode(user1.getPassword());
 		    user.setPassword(encodedPassword);
+		    user.setUserType("STUDENT");
+		    user.setStatus(1);
 		    Role role = roleRepo.findByRoleId(ROLE_USER);
 		    if(role!=null) {
 		    	log.info("....role.....");
@@ -93,6 +108,13 @@ public class UserController {
 		    }
 		    
 		}
+//		String password = user1.getPassword();
+//		System.out.println("Password:::"+password);
+//		if(password!=null) {
+//			String encodedPassword = passwordEncoder.encode(user1.getPassword());
+//			user.setPassword(encodedPassword);
+//		}
+//		
 		user.setFirstName(user1.getFirstName());
 		user.setLastName(user1.getLastName());
 		

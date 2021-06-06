@@ -54,16 +54,15 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
 		.and()
 			.formLogin().loginPage("/login")
 			.usernameParameter("userName").passwordParameter("password").successHandler(authSuccessHandler)
-			.failureForwardUrl("/fail_login")
+			
 			.and()
-		.logout().logoutSuccessUrl("/login?logout")
+		.logout().logoutSuccessUrl("/fail_login")
 		.and()
 		.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
 		.and()
 		.exceptionHandling().accessDeniedPage("/403")
-			.and()
+		.and()
 		.csrf().disable();	
-		
 
 	}
 
