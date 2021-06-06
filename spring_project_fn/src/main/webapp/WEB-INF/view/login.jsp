@@ -49,14 +49,16 @@
 		<div class="container-login100"
 			style="background-image: url('/assests/img/bg-01.jpg');">
 			<div class="wrap-login100 p-t-30 p-b-50">
-				<%-- 				<div c:if="${param.error}" class="alert alert-danger">
-					Invalid username or password.</div>
- --%>
-				<div c:if="${param.error}" class="alert alert-danger">
-					    
-					<p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
-				</div>
+	
 				<span class="login100-form-title p-b-41"> Account Login </span>
+				
+				<c:if test="${param.error ne null}">
+					<div class="alert-danger">Invalid username and password.</div>
+				</c:if>
+				<c:if test="${param.logout ne null}">
+					<div class="alert-normal">You have been logged out.</div>
+				</c:if>
+				
 				<form class="login100-form validate-form p-b-33 p-t-5" method="POST">
 
 					<div class="wrap-input100 validate-input"
@@ -75,6 +77,9 @@
 
 					<div class="container-login100-form-btn m-t-32">
 						<button class="login100-form-btn">Login</button>
+					</div>
+					<div class="container" style="margin-left: 70px; margin-top: 10px;">
+						Not register Yet??<a href="register">Register here</a>
 					</div>
 
 				</form>
